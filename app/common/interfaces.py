@@ -6,7 +6,13 @@ class ConferenceManagerInterface(Protocol):
     '''
     The container to keep track of all conferences and managing them
     '''
-    conferences: List(Conference)
+    conferences: List
+
+    @classmethod
+    def manager(cls):
+        """
+        returns a configured ConferenceManager
+        """
 
     def register(self, **kwargs):
         '''

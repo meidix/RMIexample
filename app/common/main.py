@@ -18,7 +18,7 @@ class Conference:
     total_tickets: int
     confrence_info: str
     remaining_tickets: int
-    participants: List(Participant)
+    participants: List
     conference_date: str
 
     def __init__(self, **kwargs):

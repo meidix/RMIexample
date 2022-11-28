@@ -1,4 +1,4 @@
-from common import ConferenceManagerInterface
+from ..common import ConferenceManagerInterface
 
 def serialize(function_name, args):
     return {
@@ -8,6 +8,11 @@ def serialize(function_name, args):
 
 
 class ConferenceManager(ConferenceManagerInterface):
+
+    @classmethod
+    def manager(cls):
+        data = serialize('manager', None)
+
     def register(self, **kwargs):
         data = serialize('register', kwargs)        # send the data to server
 
