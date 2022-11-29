@@ -1,7 +1,4 @@
 from .stub import ConferenceManager
 
-def main():
+def run():
     pass
-
-if __name__ == '__main__':
-    main()
