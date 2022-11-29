@@ -1,5 +1,6 @@
 import sys
 from app.client import user, admin
+from app.server import server
 
 
 def main():
@@ -15,7 +16,7 @@ def main():
         No Command Found
         ''')
     if file_to_run == 'runserver':
-        pass
+        server.run()
     elif file_to_run == 'runuser':
         user.run()
     elif file_to_run == 'runadmin':

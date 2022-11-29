@@ -3,6 +3,12 @@ from ..common import ConferenceManagerInterface
 from ..common.main import Conference
 
 class ConferenceManager(ConferenceManagerInterface):
+
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(ConferenceManager, cls).__new__(cls)
+        return cls.instance
+
     @classmethod
     def manager(cls):
         instance = cls()
