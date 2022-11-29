@@ -22,7 +22,7 @@ class ConferenceManager(ConferenceManagerInterface):
         try:
             conference = self.conferences[conference_index]
         except:
-            raise IndexError(f'conference with {conference_index} was not found')
+            raise IndexError(f'conference with index {conference_index} was not found')
 
         conference.buy_ticket(name, age)
 
