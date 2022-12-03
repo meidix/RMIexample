@@ -19,7 +19,7 @@ class ConferenceManager(ConferenceManagerInterface):
 
     def register(self, **kwargs):
         conference = Conference(**kwargs)
-        self.conferences.push(conference)
+        self.conferences.append(conference)
         return conference
 
     def buy_ticket(self, conference_index, name, age):
