@@ -6,6 +6,7 @@ def show_all_conferences():
     pass
 
 def dispatch_command(command, obj):
+    print('\n\n')
     if command == 1:
         return obj.all()
     elif command == 2:
