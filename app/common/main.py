@@ -26,6 +26,12 @@ class Conference:
         self.conference_info = kwargs.setdefault('conference_info', 'Unknown')
         self.conference_date = kwargs.setdefault('conference_date', 'Unknown')
 
+    def __str__(self):
+        return f'{self.conference_info}\t{self.conference_date}\t{self.remaining_tickets}'
+
+    def __repr__(self):
+        return str(self)
+
     def buy_ticket(self, participant_name, participant_age):
         '''
         reserves a ticket for a participant
