@@ -28,7 +28,8 @@ def dispatch_command(command, obj):
         name = str(input("enter the participant's name: "))
         age = int(input("enter the participant's age: "))
         print()
-        return obj.buy_ticket(conference_index=index - 1, name=name, age=age)
+        obj.buy_ticket(conference_index=index - 1, name=name, age=age)
+        return "Thanks for your purchase, your ticket has been reserved"
     elif command == 4:
         print()
         return obj.latest()

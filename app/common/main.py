@@ -41,4 +41,4 @@ class Conference:
             raise ConferenceFullException("no more tickets is available")
         participant = Participant(participant_name, participant_age)
         self.remaining_tickets -= 1
-        self.participants.push(participant)
+        self.participants.append(participant)
