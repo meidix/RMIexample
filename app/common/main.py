@@ -25,9 +25,10 @@ class Conference:
         self.total_tickets = self.remaining_tickets = kwargs.setdefault('total_tickets', '50')
         self.conference_info = kwargs.setdefault('conference_info', 'Unknown')
         self.conference_date = kwargs.setdefault('conference_date', 'Unknown')
+        self.participants = []
 
     def __str__(self):
-        return f'{self.conference_info}\t{self.conference_date}\t{self.remaining_tickets}'
+        return f'{self.conference_info}\t\t{self.conference_date}\t{self.remaining_tickets}'
 
     def __repr__(self):
         return str(self)

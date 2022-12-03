@@ -10,7 +10,7 @@ def invoke_remote_method(data, host, port):
         return pickle.loads(result)
 
 
-def serialize(function_name, **args):
+def serialize(function_name, args):
     return {
         'function_name': function_name,
         'args': args or None

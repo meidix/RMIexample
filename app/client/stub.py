@@ -11,11 +11,11 @@ class ConferenceManager(ConferenceManagerInterface):
         return invoke_remote_method(data, SERVER_HOST, SERVER_PORT)
 
     def register(self, **kwargs):
-        data = serialize('register', **kwargs)        # send the data to server
+        data = serialize('register', kwargs)        # send the data to server
         return invoke_remote_method(data, SERVER_HOST, SERVER_PORT)
 
     def buy_ticket(self, conference_index, name, age):
-        data = serialize('get_conference', {
+        data = serialize('buy_ticket', {
             'conference_index': conference_index,
             'name': name,
             'age': age
