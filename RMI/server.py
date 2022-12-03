@@ -1,11 +1,10 @@
 import socketserver
-import pickle
 
 
 class TCPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
-        print(f'{self.client_address[0]} connected')
+        print(f'request from {self.client_address[0]}":{self.client_address[1]} recieved')
 
 
 def run_server(socket: tuple, handler):
