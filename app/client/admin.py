@@ -2,13 +2,19 @@ from .stub import ConferenceManager
 from datetime import datetime
 
 
-def show_all_conferences():
-    pass
+def list_view(data_list):
+    counter = 1
+    result = ""
+    for row in data_list:
+        result += f'{counter}.\t\t{row}\n'
+        counter += 1
+    return result
+
 
 def dispatch_command(command, obj):
     if command == 1:
         print()
-        return obj.all()
+        return list_view(obj.all())
     elif command == 2:
         info = str(input("Enter the Conference Name: "))
         tickets = str(input('enter the total ticket count: '))
@@ -17,7 +23,6 @@ def dispatch_command(command, obj):
         print()
         return obj.register(conference_info=info, total_tickets=tickets, conference_date=date)
     elif command == 3:
-        show_all_conferences()
         index = int(input("enter the number of conference: "))
         name = str(input("enter the participant's name: "))
         age = int(input("enter the participant's age: "))
