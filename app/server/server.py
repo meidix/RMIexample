@@ -5,11 +5,15 @@ import pickle
 
 class Skeleton(TCPHandler):
 
+
+    def __init__(self, *args, **kwargs):
+        self.manager = ConferenceManager()
+        return super().__init__(*args, **kwargs)
+
     def handle(self):
         super().handle()
         self.data = pickle.loads(self.request.recv(1024))
-        manager = ConferenceManager()
-        response = self.invoke_method_on(manager)
+        response = self.invoke_method_on(self.manager)
         self.request.sendall(pickle.dumps(response))
 
     def invoke_method_on(self, obj):

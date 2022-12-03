@@ -10,7 +10,8 @@ class ConferenceManager(ConferenceManagerInterface):
         return cls.instance
 
     def __init__(self):
-        self.conferences = []
+        if not hasattr(self, 'conferences'):
+            self.conferences = []
 
     @classmethod
     def manager(cls):
