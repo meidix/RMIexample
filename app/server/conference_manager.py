@@ -9,6 +9,9 @@ class ConferenceManager(ConferenceManagerInterface):
             cls.instance = super(ConferenceManager, cls).__new__(cls)
         return cls.instance
 
+    def __init__(self):
+        self.conferences = []
+
     @classmethod
     def manager(cls):
         instance = cls()
@@ -17,6 +20,7 @@ class ConferenceManager(ConferenceManagerInterface):
     def register(self, **kwargs):
         conference = Conference(**kwargs)
         self.conferences.push(conference)
+        return conference
 
     def buy_ticket(self, conference_index, name, age):
         try:
