@@ -1,4 +1,5 @@
 from RMI.server import TCPHandler, run_server
+from RMI.registery import register_server, remove_server
 from .conference_manager import ConferenceManager
 import pickle
 
@@ -30,4 +31,8 @@ class Skeleton(TCPHandler):
 
 def run():
     HOST, PORT = '127.0.0.1', 7418
-    run_server((HOST, PORT), Skeleton)
+    register_server('ConferenceManager', HOST, PORT, '127.0.0.1', 7894)
+    try:
+        run_server((HOST, PORT), Skeleton)
+    finally:
+        remove_server('ConferenceManager', '127.0.0.1', 7894)
