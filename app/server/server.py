@@ -1,5 +1,5 @@
 from RMI.server import TCPHandler, run_server
-from RMI.registery import register_server, remove_server
+from RMI.registery import register_server, remove_server, REGISTERY_HOST, REGISTERY_PORT
 from .conference_manager import ConferenceManager
 import pickle
 
@@ -31,7 +31,7 @@ class Skeleton(TCPHandler):
 
 def run():
     HOST, PORT = '127.0.0.1', 7418
-    register_server('ConferenceManager', HOST, PORT, '127.0.0.1', 7894)
+    register_server('ConferenceManager', HOST, PORT, REGISTERY_HOST, REGISTERY_PORT)
     try:
         run_server((HOST, PORT), Skeleton)
     finally:

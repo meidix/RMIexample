@@ -1,6 +1,4 @@
 import random
-import socket
-import pickle
 from ..utils import send_socket_request
 
 class Server:
@@ -11,39 +9,44 @@ class Server:
         self.port = kwargs.setdefault('port', random.randint(1024, 10000))
 
 
-class Registrey:
+class Registery(object):
 
     def __new__(cls):
         if not hasattr(cls, 'instance'):
-            cls.instance = super(Registrey, cls).__new__(cls)
+            cls.instance = super(Registery, cls).__new__(cls)
         return cls.instance
 
     def __init__(self):
         if not hasattr(self, 'servers'):
             self.servers = []
 
+    def _retrieve(self, name):
+        for server in self.servers:
+            if server.name == name:
+                return server
+        return None
+
     def get_server(self, name):
-        index = self.servers.index(name)
-        if index:
-            server = self.servers[index]
+        server = self._retrieve(name)
+        if server:
             return (server.host, server.port)
-        return
+        raise ValueError("There is no entry for this object")
 
     def add_server(self, **kwargs):
-        index = self.servers.index(kwargs['name'])
-        if not index:
-            server = Server(**kwargs)
-            self.servers.append(server)
-            return "success"
-        else:
-            raise ValueError("a server with this name has already been registered")
+        server = self._retrieve(kwargs['name'])
+        if server:
+            raise ValueError("an object with this name has already been registered")
+        server = Server(**kwargs)
+        self.servers.append(server)
+        return "success"
 
     def remove_server(self, name):
-        index = self.servers.index(name)
-        if index:
-            server = self.servers.pop(index)
-            return server
-        return
+        server = self._retrieve(name)
+        if not server:
+            raise ValueError("This object has no record on the registery")
+        index = self.servers.index(server)
+        server = self.servers.pop(index)
+        return server
 
 
 def register_server(server_name, host, port, registery_host, registery_port):

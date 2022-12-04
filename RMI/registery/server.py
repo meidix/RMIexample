@@ -1,7 +1,7 @@
 import pickle
 
 from ..server import *
-from .registery import Registrey
+from .registery import Registery
 
 
 
@@ -12,13 +12,15 @@ REGISTERY_PORT  = 7894
 class RegisteryTCPHandler(TCPHandler):
 
     def __init__(self, *args, **kwargs):
-        self.registery = Registrey()
+        self.registery = Registery()
+        return super().__init__(*args, **kwargs)
 
     def handle(self):
         super().handle()
         self.data = pickle.loads(self.request.recv(1024))
         result = self.dispatch_action()
-        return pickle.dumps(result)
+        response = pickle.dumps(result)
+        self.request.sendall(response)
 
     def _get_args(self, data):
         args = data.get('payload', None)
@@ -27,7 +29,7 @@ class RegisteryTCPHandler(TCPHandler):
         return args
 
     def dispatch_action(self):
-        if not self.data.has_key('action'):
+        if not 'action' in self.data:
             raise KeyError(f'request body has no action')
 
         if self.data['action'] == 'add':
@@ -41,6 +43,7 @@ class RegisteryTCPHandler(TCPHandler):
             return self.registery.get_server(**args)
         else:
             raise KeyError(f"action '{self.data['action']}' not available")
+
 
 def run():
     print(f'''

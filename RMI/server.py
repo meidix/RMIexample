@@ -5,6 +5,7 @@ class TCPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
         print(f'request from {self.client_address[0]}":{self.client_address[1]} recieved')
+        return
 
 
 def run_server(socket: tuple, handler):
