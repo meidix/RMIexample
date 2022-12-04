@@ -18,13 +18,13 @@ class Registrey:
 
     def __init__(self):
         if not hasattr(self, 'servers'):
-            self.servers - []
+            self.servers = []
 
     def get_server(self, name):
         index = self.servers.index(name)
         if index:
             server = self.servers[index]
-            return server
+            return (server.host, server.port)
         return
 
     def add_server(self, **kwargs):
@@ -32,6 +32,7 @@ class Registrey:
         if not index:
             server = Server(**kwargs)
             self.servers.append(server)
+            return "success"
         else:
             raise ValueError("a server with this name has already been registered")
 

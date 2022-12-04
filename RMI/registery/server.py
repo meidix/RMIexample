@@ -20,9 +20,27 @@ class RegisteryTCPHandler(TCPHandler):
         result = self.dispatch_action()
         return pickle.dumps(result)
 
+    def _get_args(self, data):
+        args = data.get('payload', None)
+        if not args:
+            raise KeyError("server information not available")
+        return args
+
     def dispatch_action(self):
+        if not self.data.has_key('action'):
+            raise KeyError(f'request body has no action')
+
         if self.data['action'] == 'add':
-            pass
+            args = self._get_args(self.data)
+            return self.registery.add_server(**args)
+        elif self.data['action'] == 'remove':
+            args = self._get_args(self.data)
+            return self.registery.remove_server(**args)
+        elif self.data['action'] == 'get':
+            args = self._get_args(self.data)
+            return self.registery.get_server(**args)
+        else:
+            raise KeyError(f"action '{self.data['action']}' not available")
 
 def run():
     print(f'''

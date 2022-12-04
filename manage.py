@@ -1,6 +1,7 @@
 import sys
 from app.client import user, admin
 from app.server import server
+from RMI import registery
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
         runserver
         runuser
         runadmin
+        registery
         No Command Found
         ''')
     if file_to_run == 'runserver':
@@ -21,13 +23,16 @@ def main():
         user.run()
     elif file_to_run == 'runadmin':
         admin.run()
+    elif file_to_run == 'registery':
+        registery.run()
     else:
         print('''
         Command Does not Exist!!
         available commands:
         runserver,
         runuser,
-        runadmin
+        runadmin,
+        registery
         ''')
 
 
