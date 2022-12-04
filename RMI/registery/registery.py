@@ -1,5 +1,7 @@
 import random
-
+import socket
+import pickle
+from ..utils import send_socket_request
 
 class Server:
 
@@ -42,3 +44,34 @@ class Registrey:
             server = self.servers.pop(index)
             return server
         return
+
+
+def register_server(server_name, host, port, registery_host, registery_port):
+    request = {
+        'action': 'add',
+        'payload': {
+            'name': server_name,
+            'host': host,
+            'port': port
+        }
+    }
+    return send_socket_request(request, registery_host, registery_port)
+
+
+def remove_server(server_name, registery_host, registery_port):
+    request = {
+        'action': 'remove',
+        'payload': {
+            'name': server_name
+        }
+    }
+    return send_socket_request(request, registery_host, registery_port)
+
+def get_server(server_name, registery_host, registery_port):
+    request = {
+        'action': "get",
+        'payload': {
+            'name': server_name
+        }
+    }
+    return send_socket_request(request, registery_host, registery_port)
