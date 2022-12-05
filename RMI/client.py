@@ -2,6 +2,19 @@ from .registery import get_server
 from .utils import send_socket_request
 from .exception import RemoteException
 
+
+class StubMixin:
+    _registery_host = None
+    _registery_port = None
+    _remote_obj = None
+
+    def proxy(self, method, args):
+        data_bytes = serialize(method, args)
+        if not self._remote_obj:
+            self._remote_obj = self.__class__.__name__
+        return invoke_method_on_remote(data_bytes, self._remote_obj, (self._registery_host, self._registery_port))
+
+
 def serialize(function_name, args):
     return {
         'function_name': function_name,
