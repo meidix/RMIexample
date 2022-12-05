@@ -50,10 +50,12 @@ class Registery(object):
 
 
 def register_server(server_name, host, port, registery_host, registery_port):
+
+    name = server_name if isinstance(server_name, str) else server_name.__name__
     request = {
         'action': 'add',
         'payload': {
-            'name': server_name,
+            'name': name,
             'host': host,
             'port': port
         }
