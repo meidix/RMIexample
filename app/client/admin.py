@@ -18,7 +18,7 @@ def dispatch_command(command, obj):
     elif command == 2:
         info = str(input("Enter the Conference Name: "))
         tickets = int(input('enter the total ticket count: '))
-        date_string = str(input("enter conference date[d-MM-YYY]: "))
+        date_string = str(input("enter conference date[MM-DD-YYY]: "))
         date = datetime.strptime(date_string, '%m-%d-%Y').date()
         print()
         return obj.register(conference_info=info, total_tickets=tickets, conference_date=date)
