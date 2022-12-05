@@ -1,0 +1,2 @@
+class RemoteRegisteryException(Exception):
+    pass
