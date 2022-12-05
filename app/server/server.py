@@ -1,18 +1,16 @@
-from RMI.server import TCPHandler, run_server
+from RMI.server import TCPHandlerWithException, run_server
 from RMI.registery import register_server, remove_server, REGISTERY_HOST, REGISTERY_PORT
 from .conference_manager import ConferenceManager
 import pickle
 
 
-class Skeleton(TCPHandler):
-
+class Skeleton(TCPHandlerWithException):
 
     def __init__(self, *args, **kwargs):
         self.manager = ConferenceManager()
         return super().__init__(*args, **kwargs)
 
-    def handle(self):
-        super().handle()
+    def resolve_request(self):
         self.data = pickle.loads(self.request.recv(1024))
         response = self.invoke_method_on(self.manager)
         self.request.sendall(pickle.dumps(response))
