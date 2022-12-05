@@ -29,6 +29,30 @@ class TCPHandlerWithException(TCPHandler):
         self.request.sendall(pickle.dumps(response))
 
 
+class Skeleton(TCPHandlerWithException):
+    obj_class = None
+    extra_kwargs = None
+
+    def __init__(self, *args, **kwargs):
+        self.obj = self.obj_class(**self.extra_kwargs)
+        return super().__init__(*args, **kwargs)
+
+    def resolve_request(self):
+        self.data = pickle.loads(self.request.recv(1024))
+        response = self.invoke_method_on(self.obj)
+        self.request.sendall(pickle.dumps(response))
+
+    def invoke_method_on(self, obj):
+        if hasattr(obj, self.data['function_name']):
+            func = getattr(obj, self.data['function_name'])
+            kwargs = self.data['args']
+            if kwargs:
+                result = func(**kwargs)
+            else:
+                result = func()
+            return result
+        raise KeyError('Remote Function Does Not Exist')
+
 
 def run_server(socket: tuple, handler):
     with socketserver.TCPServer(socket, handler) as server:
