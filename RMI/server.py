@@ -34,7 +34,10 @@ class Skeleton(TCPHandlerWithException):
     extra_kwargs = None
 
     def __init__(self, *args, **kwargs):
-        self.obj = self.obj_class(**self.extra_kwargs)
+        if not self.extra_kwargs:
+            self.obj = self.obj_class()
+        else:
+            self.obj = self.obj_class(**self.extra_kwargs)
         return super().__init__(*args, **kwargs)
 
     def resolve_request(self):
