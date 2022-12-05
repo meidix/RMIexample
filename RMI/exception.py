@@ -1,2 +1,2 @@
-class RemoteRegisteryException(Exception):
+class RemoteException(Exception):
     pass

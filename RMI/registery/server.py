@@ -9,14 +9,13 @@ REGISTERY_HOST = '127.0.0.1'
 REGISTERY_PORT  = 7894
 
 
-class RegisteryTCPHandler(TCPHandler):
+class RegisteryTCPHandler(TCPHandlerWithException):
 
     def __init__(self, *args, **kwargs):
         self.registery = Registery()
         return super().__init__(*args, **kwargs)
 
-    def handle(self):
-        super().handle()
+    def resolve_request(self):
         self.data = pickle.loads(self.request.recv(1024))
         result = self.dispatch_action()
         response = pickle.dumps(result)

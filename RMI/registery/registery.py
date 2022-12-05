@@ -1,6 +1,5 @@
 import random
 from ..utils import send_socket_request
-from ..exception import RemoteRegisteryException
 
 class Server:
 
@@ -50,13 +49,6 @@ class Registery(object):
         return server
 
 
-def get_response(request, registery_host, registery_port):
-    try:
-        return send_socket_request(request, registery_host, registery_port)
-    except Exception as err:
-        raise RemoteRegisteryException(f"the server responded with the following error:\n{err}")
-
-
 def register_server(server_name, host, port, registery_host, registery_port):
     request = {
         'action': 'add',
@@ -66,7 +58,7 @@ def register_server(server_name, host, port, registery_host, registery_port):
             'port': port
         }
     }
-    return get_response(request, registery_host, registery_port)
+    return send_socket_request(request, registery_host, registery_port)
 
 def remove_server(server_name, registery_host, registery_port):
     request = {
@@ -75,7 +67,7 @@ def remove_server(server_name, registery_host, registery_port):
             'name': server_name
         }
     }
-    return get_response(request, registery_host, registery_port)
+    return send_socket_request(request, registery_host, registery_port)
 
 def get_server(server_name, registery_host, registery_port):
     request = {
@@ -84,4 +76,4 @@ def get_server(server_name, registery_host, registery_port):
             'name': server_name
         }
     }
-    return get_response(request, registery_host, registery_port)
+    return send_socket_request(request, registery_host, registery_port)
