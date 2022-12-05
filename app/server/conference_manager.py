@@ -13,11 +13,6 @@ class ConferenceManager(ConferenceManagerInterface):
         if not hasattr(self, 'conferences'):
             self.conferences = []
 
-    @classmethod
-    def manager(cls):
-        instance = cls()
-        return instance
-
     def register(self, **kwargs):
         conference = Conference(**kwargs)
         self.conferences.append(conference)
