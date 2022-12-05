@@ -8,11 +8,6 @@ class ConferenceManagerInterface(Protocol):
     '''
     conferences: List
 
-    @classmethod
-    def manager(cls):
-        """
-        returns a configured ConferenceManager
-        """
 
     def register(self, **kwargs):
         '''
