@@ -33,11 +33,23 @@ class Skeleton(TCPHandlerWithException):
     obj_class = None
     extra_kwargs = None
 
+    @classmethod
+    def set_object(cls, obj):
+        if not hasattr(cls, 'obj'):
+            cls.obj = obj
+        return cls
+
     def __init__(self, *args, **kwargs):
-        if not self.extra_kwargs:
-            self.obj = self.obj_class()
-        else:
-            self.obj = self.obj_class(**self.extra_kwargs)
+        if not self.obj and not self.obj_class:
+            raise ValueError('''either the remote object should be given through the set_obj
+                                function or the object singleton should be assinged to the
+                                obj_class attribute''')
+
+        if not self.obj and self.obj_class:
+            if not self.extra_kwargs:
+                self.obj = self.obj_class()
+            else:
+                self.obj = self.obj_class(**self.extra_kwargs)
         return super().__init__(*args, **kwargs)
 
     def resolve_request(self):
