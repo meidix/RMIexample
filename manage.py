@@ -24,7 +24,16 @@ def main():
     elif file_to_run == 'runadmin':
         admin.run()
     elif file_to_run == 'registery':
-        registery.run()
+        host, port = None, None
+        if len(sys.argv) > 2:
+            try:
+                host, port = str(sys.argv[2]), int(sys.argv[3])
+            except:
+                print("there was a problem in registery arguments, retry with correct arguments")
+        if host and port:
+            registery.run(host, port)
+        else:
+            registery.run()
     else:
         print('''
         Command Does not Exist!!

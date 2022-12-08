@@ -44,8 +44,8 @@ class RegisteryTCPHandler(TCPHandlerWithException):
             raise KeyError(f"action '{self.data['action']}' not available")
 
 
-def run():
+def run(host=REGISTERY_HOST, port=REGISTERY_PORT):
     print(f'''
-    The Registery Is Running On Host {REGISTERY_HOST} With Port {REGISTERY_PORT}
+    The Registery Is Running On Host {host} With Port {port}
     ''')
-    run_server((REGISTERY_HOST, REGISTERY_PORT), RegisteryTCPHandler)
+    run_server((host, port), RegisteryTCPHandler)

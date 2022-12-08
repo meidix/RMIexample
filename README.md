@@ -15,18 +15,23 @@ entries for remote objects, or retrieve the address of a remote object that has 
 
 To run the registery open up a terminal and run the following command:
 
-```
+```bash
 $ python manage.py registery
 ```
 
-The default address and port of the registery is `localhost:7894`.\
+The default address and port of the registery is `localhost:7894`. but you can run the registery on your desired address. To do so follow the instruction below
+
+```bash
+$ python manage.py registery <desired_host> <desired_port>
+```
+
 The `manage.py` file is the main entry from which all the servers and applications are run. the specified argument determines what application the `manage.py` should run, which in this case is the `registery`.\
 As you walkthrough this file you will see other command used with
 the `manage.py` file.
 
 After running the registery you need to run the server which contains the remote object. In another terminal run the following command:
 
-```
+```bash
 $ python manage.py runserver
 ```
 
@@ -38,14 +43,14 @@ One of the applications is used by the admins to add, remove and manage Conferen
 
 To run the `user` application run the following command:
 
-```
+```bash
 $ python manage.py runuser
 ```
 
 To run the `admin` application run the following command:
 
-```
-$ pythion manage.py runadmin
+```bash
+$ python manage.py runadmin
 ```
 
 ---
